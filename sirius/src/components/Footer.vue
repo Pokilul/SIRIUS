@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-blue d-flex w-100 align-center px-4">
-    <strong>SIRIUS</strong>
+  <div class="bg-teal d-flex w-100 align-center px-4">
+    <strong>Universidad de Guanajuato</strong>
     <v-spacer></v-spacer>
     <v-btn
       v-for="icon in icons"
@@ -15,7 +15,7 @@
 <script>
 export default {
   data: () => ({
-    icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin"],
+    icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"],
   }),
 };
 </script>

@@ -1,19 +1,11 @@
 <template>
   <v-app>
-    <v-app-bar><NavBar /></v-app-bar>
-    <v-navigation-drawer
-      class="mx-auto my-auto w-25 pa-3"
-      theme="white"
-      floating
-      ><NavDrawer
-    /></v-navigation-drawer>
-    <v-main>
-      <router-view />
+    <NavBar />
+    <v-footer app><Footer /></v-footer>
+    <NavDrawer />
+    <v-main class="w-100 mx-auto my-auto pa-auto pt-0">
+      <v-container><router-view /></v-container>
     </v-main>
-    <!--<v-footer app><Footer /></v-footer>-->
-    <div>
-      <v-footer><Footer /></v-footer>
-    </div>
   </v-app>
 </template>
 
