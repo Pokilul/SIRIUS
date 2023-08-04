@@ -13,6 +13,18 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/sintesis',
+    component: () => import('@/layouts/default/Default.vue'),
+    children: [
+      {
+        path: '/sintesis',
+        name: 'Sintesis',
+        component: () => import('@/views/Sintesis.vue'),
+      },
+    ],
+  },
+  
 ]
 
 const router = createRouter({

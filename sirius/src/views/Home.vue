@@ -2,11 +2,12 @@
   <v-card variant="tonal">
     <v-container
       ><v-row
-        ><v-col cols="3" centered
+        ><v-col cols="3" sm="12" md="3" centered
           ><v-img
             class="mx-auto my-auto width-auto"
             border="0"
             aspect-ratio="4/3"
+            max-height="214"
             src="../assets/images/escudo-png.png" /></v-col
         ><v-col class="pa-3 text-center">
           <p class="text-right">
