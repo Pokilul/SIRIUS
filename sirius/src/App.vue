@@ -20,7 +20,7 @@
 import { ref, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import Footer from "/src/components/Footer.vue";
-import Entrada from "/src/components/Entrada.vue";  // Asegúrate de que la ruta sea correcta
+import Entrada from "/src/components/Entrada.vue";
 
 const store = useStore();
 const isLoggedIn = computed(() => store.state.auth.loggedIn);

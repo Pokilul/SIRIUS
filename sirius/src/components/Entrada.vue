@@ -65,9 +65,9 @@ export default {
     methods: {
         async submitForm() {
             try {
-                const response = await axios.post('http://localhost:8000/login', {
+                const response = await axios.post('http://localhost:4000/api/auth/login', {
                     Nombre: this.UserName,
-                    Pass: this.Password
+                    Password: this.Password
                 }, {
                     headers: {
                         'Content-Type': 'application/json'

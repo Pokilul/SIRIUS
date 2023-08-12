@@ -19,11 +19,11 @@ const mutations = {
 };
 
 const actions = {
-    async logIn({ commit }, { username, password }) {
+    async logIn({ commit }, { Usuario, Password }) {
         try {
             const response = await axios.post('/api/auth/login', {
-                username: username,
-                password: password
+                Usuario: Usuario,
+                Password: Password
             });
 
             if (response.data && response.data.token) {

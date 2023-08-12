@@ -1,8 +1,17 @@
+/**
+ * Controller for authentication related operations
+ * @module authController
+ */
+
 const table = 'auth';
 const bcrypt = require('bcrypt');
 const auth = require('../../auth');
-const e = require('express');
 
+/**
+ * Creates a new instance of the authController
+ * @param {Object} InjectionDatabase - The database instance to use for the controller
+ * @returns {Object} - The authController object with login and db_add methods
+ */
 module.exports = function (InjectionDatabase) {
 
     let database = InjectionDatabase;
@@ -11,6 +20,15 @@ module.exports = function (InjectionDatabase) {
         database = require('../../database/mysql');
     }
 
+    /**
+     * Authenticates a user with the provided credentials
+     * @async
+     * @function login
+     * @param {string} Usuario - The username of the user to authenticate
+     * @param {string} Password - The password of the user to authenticate
+     * @returns {Promise<string>} - A promise that resolves to a JWT token if authentication is successful
+     * @throws {Error} - If the provided credentials are incorrect
+     */
     async function login(Usuario, Password) {
         const authData = await database.query(table, { Usuario: Usuario });
         return bcrypt.compare(Password, authData.Password)
@@ -23,6 +41,16 @@ module.exports = function (InjectionDatabase) {
             })
     }
 
+    /**
+     * Adds a new user to the authentication table
+     * @async
+     * @function db_add
+     * @param {Object} data - The user data to add to the authentication table
+     * @param {number} data.ID_Usuario - The ID of the user to add
+     * @param {string} [data.Usuario] - The username of the user to add
+     * @param {string} [data.Password] - The password of the user to add
+     * @returns {Promise<number>} - A promise that resolves to the ID of the added user
+     */
     async function db_add(data) {
         const authData = {
         ID_Usuario: data.ID_Usuario,
@@ -42,4 +70,3 @@ module.exports = function (InjectionDatabase) {
         db_add
     }
 }
-
