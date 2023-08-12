@@ -1,4 +1,10 @@
-// Utilities
-import { createPinia } from 'pinia'
+import { createStore } from 'vuex';
+import auth from './modules/auth'; // Asegúrate de que la ruta es correcta
 
-export default createPinia()
+const store = createStore({
+  modules: {
+    auth
+  }
+});
+
+export default store;

@@ -10,12 +10,23 @@
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
+    "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
     "core-js": "^3.29.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.1",
+    "mysql2": "^3.6.0",
     "pinia": "^2.0.0",
     "roboto-fontface": "*",
-    "vue": "^3.2.0",
+    "sequelize": "^6.32.1",
+    "vue": "^3.2.36",
     "vue-router": "^4.0.0",
     "vuetify": "^3.0.0",
+    "vuex": "^4.0.2",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
@@ -25,5 +36,10 @@
     "sass": "^1.60.0",
     "vite": "^4.2.0",
     "vite-plugin-vuetify": "^1.0.0"
-  }
+  },
+  "description": "```\r # yarn\r yarn",
+  "main": ".eslintrc.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

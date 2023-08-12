@@ -1,20 +1,26 @@
-/**
- * main.js
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
+import { createApp } from 'vue';
+import axios from 'axios';
 
-// Components
-import App from './App.vue'
+import App from './App.vue';
+import { registerPlugins } from '@/plugins';
+import store from './store';
 
-// Composables
-import { createApp } from 'vue'
+// Configura axios
+axios.defaults.baseURL = 'http://localhost:8000/';  // Ajusta con la URL base de tu backend
 
-// Plugins
-import { registerPlugins } from '@/plugins'
+// Interceptor para incluir el token en las cabeceras de las solicitudes
+axios.interceptors.request.use((config) => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+        config.headers.Authorization = 'Bearer ' + token;
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
 
-const app = createApp(App)
+const app = createApp(App);
+app.use(store);
+registerPlugins(app);
 
-registerPlugins(app)
-
-app.mount('#app')
+app.mount('#app');
