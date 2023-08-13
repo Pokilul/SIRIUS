@@ -13,7 +13,14 @@
       <!-- Identificación del Programa -->
       <!-- CATEGORÍA 1 -->
       <v-list-group fluid>
-        <template v-slot:activator="{ props }"> </template>
+        <template v-slot:activator="{ props }">
+          <v-list-item
+            v-bind="props"
+            prepend-icon="mdi-folder"
+            title="1. Fundamentos y condiciones de operación"
+            @click.stop
+          ></v-list-item
+        ></template>
         <!-- CATEGORÍA 1.1 -->
         <v-list-group class="pl-3">
           <template v-slot:activator="{ props }">
@@ -24,15 +31,15 @@
               @click.stop
             ></v-list-item>
           </template>
-          <div class="ml-n12">
-            <v-list-item
-              v-for="(item, i) in cat_1_1"
-              :key="i"
-              :title="item.title"
-              :prepend-icon="item.icon"
-              :value="item.title"
-              @click.stop
-            ></v-list-item>
+          <div class="ml-n12" v-for="(item, i) in cat_1_1" :key="i">
+            <router-link class="router" :to="{ path: item.route }">
+              <v-list-item
+                :title="item.title"
+                :prepend-icon="item.icon"
+                :value="item.title"
+                @click.stop
+              ></v-list-item>
+            </router-link>
           </div>
         </v-list-group>
         <!-- CATEGORÍA 1.2 -->
@@ -605,19 +612,38 @@ export default {
       {
         title: "1.1.1. Misión y visión del programa",
         icon: "mdi-file-outline",
+        route: "/autodiagnostico/fundamentos/propositos/mision_vision",
       },
       {
         title: "1.1.2. Fundamentos de la necesidad del programa",
         icon: "mdi-file-outline",
+        route: "/autodiagnostico/fundamentos/propositos/mision_vision",
       },
       {
         title: "1.1.3. Plan de desarrollo del programa",
         icon: "mdi-file-outline",
+        route: "/autodiagnostico/fundamentos/propositos/mision_vision",
       },
-      { title: "1.1.4. Perfil de ingreso", icon: "mdi-file-outline" },
-      { title: "1.1.5. Perfil de egreso", icon: "mdi-file-outline" },
-      { title: "Fortalezas", icon: "mdi-file-outline" },
-      { title: "Oportunidades de mejora", icon: "mdi-file-outline" },
+      {
+        title: "1.1.4. Perfil de ingreso",
+        icon: "mdi-file-outline",
+        route: "/autodiagnostico/fundamentos/propositos/mision_vision",
+      },
+      {
+        title: "1.1.5. Perfil de egreso",
+        icon: "mdi-file-outline",
+        route: "/autodiagnostico/fundamentos/propositos/mision_vision",
+      },
+      {
+        title: "Fortalezas",
+        icon: "mdi-file-outline",
+        route: "/autodiagnostico/fundamentos/propositos/mision_vision",
+      },
+      {
+        title: "Oportunidades de mejora",
+        icon: "mdi-file-outline",
+        route: "/autodiagnostico/fundamentos/propositos/mision_vision",
+      },
     ],
 
     cat_1_2: [
