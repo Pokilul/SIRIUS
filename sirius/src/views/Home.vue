@@ -1,5 +1,5 @@
 <template>
-  <v-card variant="tonal">
+  <v-card class="h-auto" variant="tonal">
     <v-container
       ><v-row
         ><v-col cols="3" sm="12" md="3" centered
