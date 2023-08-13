@@ -43,7 +43,7 @@ const router = createRouter({
 
 // Guardia de navegación
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem('authToken'); // Asumimos que guardas el token en localStorage
+  const loggedIn = localStorage.getItem('authToken'); // El token en localStorage
   
   if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
     // Si requiere autenticación y no hay token, redirige a la página de login

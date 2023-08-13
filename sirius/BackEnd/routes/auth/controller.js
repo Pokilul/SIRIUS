@@ -6,6 +6,7 @@
 const table = 'auth';
 const bcrypt = require('bcrypt');
 const auth = require('../../auth');
+const axios = require('axios'); // Asegúrate de tener axios instalado
 
 /**
  * Creates a new instance of the authController
@@ -31,14 +32,19 @@ module.exports = function (InjectionDatabase) {
      */
     async function login(Usuario, Password) {
         const authData = await database.query(table, { Usuario: Usuario });
-        return bcrypt.compare(Password, authData.Password)
-            .then((result) => {
-                if (result === true) {
-                    return auth.assignToken({ ...authData});
-                }else{
-                    throw new Error('Usuario o contraseña incorrectos');
-                }
-            })
+        if (authData === undefined) {
+            throw new Error('Usuario o contraseña incorrectos');
+        }
+        else {
+            return bcrypt.compare(Password, authData.Password)
+                .then((result) => {
+                    if (result === true) {
+                        return auth.assignToken({ ...authData});
+                    }else{
+                        throw new Error('Usuario o contraseña incorrectos');
+                    }
+                })
+            }
     }
 
     /**

@@ -6,7 +6,7 @@ import { registerPlugins } from '@/plugins';
 import store from './store';
 
 // Configura axios
-axios.defaults.baseURL = 'http://localhost:8000/';  // Ajusta con la URL base de tu backend
+axios.defaults.baseURL = 'http://localhost:4000/';  // Ajusta con la URL base de tu backend
 
 // Interceptor para incluir el token en las cabeceras de las solicitudes
 axios.interceptors.request.use((config) => {
