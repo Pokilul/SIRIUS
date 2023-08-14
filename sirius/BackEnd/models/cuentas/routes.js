@@ -1,6 +1,6 @@
 /**
  * Express router for user accounts.
- * @module routes/cuentas
+ * @module models/cuentas
  */
 
 const express = require('express');

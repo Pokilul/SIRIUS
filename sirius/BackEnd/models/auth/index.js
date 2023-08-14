@@ -1,6 +1,6 @@
 /**
- * Module that exports the controller function for the cuentas route.
- * @module routes/cuentas/index
+ * Module that exports the authentication controller with the database connection.
+ * @module models/auth/index
  */
 
 const db = require('../../database/mysql');

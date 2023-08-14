@@ -1,11 +1,11 @@
 export const menuData = [{
     title: "Autodiagnóstico SLISC",
     icon: "mdi-collage",
-    url: 'home.asp',
+    url: '/',
     items: [{
             title: "Identificación del programa",
             icon: "mdi-folder",
-            url: 'sintesis/Sintesis1.asp',
+            url: '/sintesis',
         },
         {
             title: "I. Fundamentos y condiciones de operación",
@@ -18,7 +18,7 @@ export const menuData = [{
                     items: [{
                             title: "1.1.1. Misión y visión del programa",
                             icon: "mdi-file-outline",
-                            url: '0.asp?indicador=1'
+                            url: '/autodiagnostico/fundamentos/propositos/mision_vision'
                         },
                         {
                             title: "1.1.2. Fundamentación de la necesidad del programa",

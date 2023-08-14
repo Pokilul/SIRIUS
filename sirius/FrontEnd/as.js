@@ -6,8 +6,8 @@ const cors = require('cors');
 const config = require('./config');
 
 // Import routes
-const cuentas = require('./routes/cuentas/routes');
-const auth = require('./routes/auth/routes');
+const cuentas = require('./models/cuentas/routes');
+const auth = require('./models/auth/routes');
 
 // Import error handling middleware
 const error = require('./network/errors');
@@ -219,7 +219,7 @@ module.exports = error;
 
 network/errors.js
 const responses = require('./response');
-const controller = require('BackEnd/routes/auth/controller');
+const controller = require('BackEnd/models/auth/controller');
 
 function errors(err, req, res, next) {
   console.error('[error]', err);
@@ -256,7 +256,7 @@ exports.error = function (req , res, message, status, details) {
     });
 }
 
-routes/auth/controller.js
+models/auth/controller.js
 const table = 'auth';
 const bcrypt = require('bcrypt');
 const auth = require('../../auth');
@@ -301,13 +301,13 @@ module.exports = function (InjectionDatabase) {
     }
 }
 
-routes/auth/index.js
+models/auth/index.js
 const db = require('../../database/mysql');
 const ctrl = require('./controller');
 
 module.exports = ctrl(db);
 
-routes/auth/routes.js
+models/auth/routes.js
 const express = require('express');
 const responses = require('../../network/response');
 const controller = require('./index');
@@ -327,7 +327,7 @@ async function login(req, res, next) {
 
 module.exports = router;
 
-routes/cuentas/controller.js
+models/cuentas/controller.js
 const table = 'cuentas';
 const auth = require('../auth');
 
@@ -383,13 +383,13 @@ module.exports = function (InjectionDatabase) {
     }
 }
 
-routes/cuentas/index.js
+models/cuentas/index.js
 const db = require('../../database/mysql');
 const ctrl = require('./controller');
 
 module.exports = ctrl(db);
 
-routes/cuentas/routes.js
+models/cuentas/routes.js
 const express = require('express');
 const security = require('./security');
 const responses = require('../../network/response');
@@ -441,7 +441,7 @@ router.put('/', security(), u_delete);
 
 module.exports = router;
 
-routes/cuentas/security.js
+models/cuentas/security.js
 const auth = require("../../auth")
 
 function checkAuth() {

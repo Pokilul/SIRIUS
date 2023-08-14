@@ -34,6 +34,18 @@ const routes = [
       },
     ],
   },
+  // RUTA 1.1.1
+  {
+    path: '/autodiagnostico/fundamentos/propositos/mision_vision',
+    component: () => import('@/layouts/default/Default.vue'),
+    children: [
+      {
+        path: '/autodiagnostico/fundamentos/propositos/mision_vision',
+        name: 'autodiagnostico_mision_vision',
+        component: () => import('@/views/autodiagnostico/cat_1/cat_1_1/view_1_1_1.vue'),
+      },
+    ],
+  },
 ]
 
 const router = createRouter({

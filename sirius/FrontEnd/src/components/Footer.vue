@@ -1,10 +1,19 @@
 <template>
   <!-- The footer component for the Universidad de Guanajuato website -->
   <div class="footer d-flex w-100 px-4">
-    <strong>Universidad de Guanajuato</strong>
+    <strong
+      >©2023 División de Ingenierías, Campus Irapuato-Salamanca, Universidad de
+      Guanajuato.</strong
+    >
     <v-spacer></v-spacer>
     <!-- Social media icons with links to the university's profiles -->
-    <a v-for="icon in icons" :key="icon" :href="getSocialLink(icon)" class="mx-4 icon-link" target="_blank">
+    <a
+      v-for="icon in icons"
+      :key="icon"
+      :href="getSocialLink(icon)"
+      class="mx-4 icon-link"
+      target="_blank"
+    >
       <v-icon :color="iconColor" large>{{ icon }}</v-icon>
     </a>
   </div>
@@ -21,8 +30,14 @@ export default {
    */
   data: () => ({
     // Array of social media icons to display
-    icons: ["mdi-facebook", "mdi-twitter", "mdi-instagram", "mdi-youtube", "mdi-linkedin"],
-    iconColor: "white"
+    icons: [
+      "mdi-facebook",
+      "mdi-twitter",
+      "mdi-instagram",
+      "mdi-youtube",
+      "mdi-linkedin",
+    ],
+    iconColor: "white",
   }),
   methods: {
     /**
@@ -57,7 +72,7 @@ export default {
   justify-content: space-between;
   display: block;
   position: relative;
-  background: #07203E;
+  background: #07203e;
   color: #ffffff;
   padding: 35px 70px;
 }
@@ -68,6 +83,6 @@ export default {
 }
 
 .icon-link:hover {
-  transform: scale(2.0);
+  transform: scale(2);
 }
 </style>

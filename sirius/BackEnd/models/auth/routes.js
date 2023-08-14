@@ -1,6 +1,6 @@
 /**
  * Routes for authentication endpoints
- * @module routes/auth
+ * @module models/auth
  */
 
 const express = require('express');
@@ -19,7 +19,7 @@ const router = express.Router();
  * Route serving login endpoint.
  * @name post/login
  * @function
- * @memberof module:routes/auth~authRouter
+ * @memberof module:models/auth~authRouter
  * @inner
  * @param {Object} req - Express request object.
  * @param {Object} req.body - Request body.
@@ -34,7 +34,7 @@ router.post('/login', login);
  * Login controller function.
  * @name login
  * @function
- * @memberof module:routes/auth~authRouter
+ * @memberof module:models/auth~authRouter
  * @inner
  * @param {Object} req - Express request object.
  * @param {Object} req.body - Request body.

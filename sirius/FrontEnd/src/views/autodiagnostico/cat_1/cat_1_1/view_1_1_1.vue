@@ -1,5 +1,5 @@
 <template>
-  <v-card variant="tonal">
+  <v-card class="h-auto mt-5 ml-3 mr-3" variant="tonal">
     <font face="Trebuchet MS">
       <p class="text-h3 text-center pt-3">
         1.1.1 Misión y visión del programa<br />

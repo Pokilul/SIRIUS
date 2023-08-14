@@ -5,8 +5,8 @@ const cors = require('cors');
 const config = require('./config');
 
 // Import routes
-const cuentas = require('./routes/cuentas/routes');
-const auth = require('./routes/auth/routes');
+const cuentas = require('./models/cuentas/routes');
+const auth = require('./models/auth/routes');
 
 // Import error handling middleware
 const error = require('./network/errors');
