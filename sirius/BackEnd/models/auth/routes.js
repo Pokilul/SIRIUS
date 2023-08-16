@@ -46,8 +46,8 @@ router.post('/login', login);
  */
 async function login(req, res, next) {
     try {
-        const token = await controller.login(req.body.Usuario, req.body.Password);
-        responses.success(req, res, token, 200);
+        const authInfo = await controller.login(req.body.Usuario, req.body.Password);
+        responses.success(req, res, authInfo, 200);
     } catch (error) {
         next(error);
     }

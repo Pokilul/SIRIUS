@@ -12,6 +12,7 @@
         ><v-col class="pa-3 text-center">
           <p class="text-right">
             <v-btn
+              v-if="canEdit"
               class="text-right"
               prepend-icon="mdi-pencil"
               variant="outlined"
@@ -23,251 +24,157 @@
           </p>
           <template>
             <v-dialog
+              max-width="90%"
               class="w-75"
-              min-width="700"
               transition="dialog-bottom-transition"
               v-model="dialog"
               persistent
             >
               <v-card>
-                <form action="">
+                <form @submit.prevent="updatePortada">
                   <v-card-title class="mt-5 mx-5 mb-5">
                     <v-container
                       class="rounded bg-blue-lighten-2 text-white font-weight-bold"
+                      fluid
                     >
                       <h1 class="mt-0 mb-0">
                         <v-icon
+                          fluid
                           class="pb-1 mr-n1"
                           icon="mdi-pencil-outline"
                           size="x-small"
                         />
-                        Editar portada
+                        Editar Portada
                       </h1></v-container
                     >
                   </v-card-title>
                   <v-card-text class="font-weight-bold">
                     <v-container>
-                      <v-table theme="light">
-                        <tbody class="">
-                          <tr>
-                            <td class="w-25"><p>Rector del Campus</p></td>
-                            <td clas="w-75">
-                              <v-text-field
-                                class="text-field"
-                                label="Nombre del rector del campus"
-                                v-model="portada.Rector"
-                              ></v-text-field>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Secretario académico de Campus</td>
-                            <td>
-                              <v-text-field
-                                class="text-field"
-                                label="Nombre del secretario académico del Campus"
-                                v-model="portada.Rector"
-                              ></v-text-field>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Director de División</td>
-                            <td>
-                              <v-text-field
-                                class="text-field"
-                                label="Nombre del director de la división"
-                                v-model="portada.Rector"
-                              ></v-text-field>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Email Director de División</td>
-                            <td>
-                              <v-text-field
-                                class="text-field"
-                                label="Correo electrónico del director de la división"
-                                v-model="portada.Rector"
-                              ></v-text-field>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Coordinador de Prog. Educativo</td>
-                            <td>
-                              <v-text-field
-                                class="text-field"
-                                label="Nombre del coordinador del prog. educativo"
-                                v-model="portada.Rector"
-                              ></v-text-field>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Email Coordinador del Prog. Educativo</td>
-                            <td>
-                              <v-text-field
-                                class="text-field"
-                                label="Correo electrónico del coordinador del prog. educativo"
-                                v-model="portada.Rector"
-                              ></v-text-field>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Fecha de elaboración</td>
-                            <td>
-                              <v-text-field
-                                class="text-field"
-                                label="Fecha de elaboración"
-                                v-model="portada.Rector"
-                              ></v-text-field>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Fecha de corte</td>
-                            <td>
-                              <v-text-field
-                                class="mt-2"
-                                label="Fecha de corte"
-                                v-model="portada.Rector"
-                              ></v-text-field>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </v-table>
+                      <v-row v-for="field in formFields" :key="field.model">
+                        <v-col cols="12" md="4">{{ field.label }}</v-col>
+                        <v-col cols="12" md="8">
+                          <v-text-field
+                            v-model="portada[field.model]"
+                            :label="field.label"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
                     </v-container>
                   </v-card-text>
-                  <v-container class="text-center ma-0 mt-n12" fluid>
+                  <v-container class="text-right ma-0 mt-n12" fluid>
                     <v-btn
-                      variant="text"
+                      fluid
+                      prepend-icon="mdi-check-circle"
+                      rounded="lg"
+                      type="submit"
+                      variant="tonal"
                       size="large"
                       color="info"
-                      @click="dialog = !dialog"
                       >Actualizar</v-btn
+                    >
+                    <span class="mx-2"></span>
+
+                    <v-btn
+                      fluid
+                      prepend-icon="mdi-close"
+                      rounded="lg"
+                      variant="tonal"
+                      size="large"
+                      color="red-darken-4"
+                      @click="dialog = false"
+                      >Cancelar</v-btn
                     >
                   </v-container>
                 </form>
               </v-card>
             </v-dialog>
           </template>
-          <p class="text-h3">
-            <font face="Trebuchet MS" color="#B9A233"
-              >Universidad de Guanajuato</font
-            ><br />
+          <p class="text-h3" style="font-family: Trebuchet MS; color: #b9a233">
+            Universidad de Guanajuato<br />
           </p>
-          <p class="text-h4">
-            <font face="Trebuchet MS" color="#B9A233"
-              >Campus Irapuato-Salamanca</font
-            >
+          <p class="text-h4" style="font-family: Trebuchet MS; color: #b9a233">
+            Campus Irapuato-Salamanca
           </p>
-          <p>
-            <font class="text-h5" face="Trebuchet MS" color="#B9A233"
-              >División de Ingenierías</font
-            >
+          <p class="text-h5" style="font-family: Trebuchet MS; color: #b9a233">
+            División de Ingenierías
           </p>
           <br />
-          <p>
-            <font
-              class="text-h5 font-weight-bold"
-              face="Trebuchet MS"
-              color="#000000"
-              >[ INSERTAR NOMBRE CARRERA AQUÍ ]</font
-            >
-          </p>
+          <p class="text-h5 font-weight-bold">[ INSERTAR PROGRAMA ]</p>
           <br />
-          <p>
-            <font
-              class="text-h6 font-weight-black"
-              face="Trebuchet MS"
-              color="#000000"
-              >[ INSERTAR NOMBRE AQUÍ ]</font
-            >
+          <p
+            class="text-h6 font-weight-black"
+            style="font-family: Trebuchet MS; color: #000000"
+          >
+            {{ portada.Rector }}
           </p>
-          <p>
-            <font
-              class="text-h6 font-weight-bold"
-              face="Trebuchet MS"
-              color="#000000"
-              >Rector del campus</font
-            >
+          <p
+            class="text-h6 font-weight-bold"
+            style="font-family: Trebuchet MS; color: #000000"
+          >
+            Rector del campus
           </p>
 
-          <p>
-            <font
-              class="text-h6 font-weight-black"
-              face="Trebuchet MS"
-              color="#000000"
-              >[ INSERTAR NOMBRE AQUÍ ]</font
-            >
+          <p
+            class="text-h6 font-weight-black"
+            style="font-family: Trebuchet MS; color: #000000"
+          >
+            {{ portada.SecAcadC }}
           </p>
-          <p>
-            <font
-              class="text-h6 font-weight-bold"
-              face="Trebuchet MS"
-              color="#000000"
-              >Secretario académico</font
-            >
+          <p
+            class="text-h6 font-weight-bold"
+            style="font-family: Trebuchet MS; color: #000000"
+          >
+            Secretario académico
           </p>
 
-          <p>
-            <font
-              class="text-h6 font-weight-black"
-              face="Trebuchet MS"
-              color="#000000"
-              >[ INSERTAR NOMBRE AQUÍ ]</font
-            >
+          <p
+            class="text-h6 font-weight-black"
+            style="font-family: Trebuchet MS; color: #000000"
+          >
+            {{ portada.Director }}
           </p>
-          <p>
-            <font
-              class="text-h6 font-weight-bold"
-              face="Trebuchet MS"
-              color="#000000"
-              >Director de división</font
-            >
+          <p
+            class="text-h6 font-weight-bold"
+            style="font-family: Trebuchet MS; color: #000000"
+          >
+            Director de división
           </p>
-          <p>
-            <font class="font-weight-bold" face="Trebuchet MS" color="#000000"
-              >Carretera Salamanca - Valle de Santiago Km. 3.5 + 1.8; Comunidad
-              de Palo Blanco; Salamanca, Gto.</font
-            >
+          <p class="font-weight-bold" face="Trebuchet MS" color="#000000">
+            Carretera Salamanca - Valle de Santiago Km. 3.5 + 1.8; Comunidad de
+            Palo Blanco; Salamanca, Gto.
           </p>
-          <p>
-            <font class="font-weight-bold" face="Trebuchet MS" color="#000000"
-              >Tel: Conmutador: 464 647 99 40 extensiones 2310 y 2304 <br />Fax:
-              Extensión 2311 e-mail: [ INSERTAR AQUÍ ]</font
-            >
+          <p class="font-weight-bold" face="Trebuchet MS" color="#000000">
+            Tel: Conmutador: 464 647 99 40 extensiones 2310 y 2304 <br />Fax:
+            Extensión 2311 e-mail: {{ portada.Correo_D }}
           </p>
           <br />
-          <p>
-            <font
-              class="text-h6 font-weight-black"
-              face="Trebuchet MS"
-              color="#000000"
-              >[ INSERTAR NOMBRE AQUÍ ]</font
-            >
+          <p
+            class="text-h6 font-weight-black"
+            style="font-family: Trebuchet MS; color: #000000"
+          >
+            {{ portada.Coordinador }}
           </p>
-          <p>
-            <font
-              class="text-h6 font-weight-bold"
-              face="Trebuchet MS"
-              color="#000000"
-              >Coordinador del programa educativo</font
-            >
+          <p
+            class="text-h6 font-weight-bold"
+            style="font-family: Trebuchet MS; color: #000000"
+          >
+            Coordinador del programa educativo
           </p>
-          <p>
-            <font class="font-weight-bold" face="Trebuchet MS" color="#000000"
-              >Carretera Salamanca - Valle de Santiago Km. 3.5 + 1.8; Comunidad
-              de Palo Blanco; Salamanca, Gto.</font
-            >
+          <p class="font-weight-bold" face="Trebuchet MS" color="#000000">
+            Carretera Salamanca - Valle de Santiago Km. 3.5 + 1.8; Comunidad de
+            Palo Blanco; Salamanca, Gto.
           </p>
-          <p>
-            <font class="font-weight-bold" face="Trebuchet MS" color="#000000"
-              >Tel: Conmutador: 464 647 99 40 extensiones 2310 y 2304 <br />Fax:
-              Extensión 2311 e-mail: [ INSERTAR AQUÍ ]</font
-            >
+          <p class="font-weight-bold" face="Trebuchet MS" color="#000000">
+            Tel: Conmutador: 464 647 99 40 extensiones 2310 y 2304 <br />Fax:
+            Extensión 2311 e-mail: {{ portada.Correo_C }}
           </p>
           <br />
-          <p class="text-left">
-            <font class="font-weight-bold" face="Trebuchet MS" color="#000000"
-              >Fecha de elaboración: [ INSERTAR AQUÍ ]<br />
-              Fecha de corte de la información: [ INSERTAR AQUÍ ]</font
-            >
+          <p
+            class="text-left font-weight-bold"
+            style="font-family: Trebuchet MS; color: #000000"
+          >
+            Fecha de elaboración: {{ portada.Fecha_Elaboracion }}<br />
+            Fecha de corte de la información: {{ portada.Fecha_Corte }}
           </p>
         </v-col></v-row
       ></v-container
@@ -276,6 +183,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import axios from "axios";
+
 export default {
   data: () => ({
     dialog: false,
@@ -289,8 +199,63 @@ export default {
       Fecha_Elaboracion: "",
       Fecha_Corte: "",
     },
-    Rector: "",
+    formFields: [
+      { label: "Rector del Campus", model: "Rector" },
+      { label: "Secretario Académico de Campus", model: "SecAcadC" },
+      { label: "Director de División", model: "Director" },
+      { label: "Correo del Director", model: "Correo_D" },
+      { label: "Coordinador del Programa Educativo", model: "Coordinador" },
+      { label: "Correo del Coordinador", model: "Correo_C" },
+      { label: "Fecha de Elaboración", model: "Fecha_Elaboracion" },
+      { label: "Fecha de Corte", model: "Fecha_Corte" },
+    ],
   }),
+  mounted() {
+    this.getPortadaData();
+  },
+
+  methods: {
+    async getPortadaData() {
+      try {
+        const response = await axios.get("api/portada/1");
+        this.portada = response.data.body;
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    },
+    async updatePortada() {
+      try {
+        let dataToSend = {
+          ID_Portada: 1,
+          Rector: this.portada.Rector,
+          SecAcadC: this.portada.SecAcadC,
+          Director: this.portada.Director,
+          Correo_D: this.portada.Correo_D,
+          Coordinador: this.portada.Coordinador,
+          Correo_C: this.portada.Correo_C,
+          Fecha_Elaboracion: this.portada.Fecha_Elaboracion,
+          Fecha_Corte: this.portada.Fecha_Corte,
+        };
+        console.log(dataToSend);
+        const response = await axios.post("api/portada/", dataToSend);
+        if (response.status === 200 || response.status === 201) {
+          this.dialog = false;
+          this.getPortadaData();
+        }
+      } catch (error) {
+        console.error("Error updating data", error);
+      }
+    },
+  },
+
+  computed: {
+    ...mapState({
+      userLevel: (state) => state.auth.level,
+    }),
+    canEdit() {
+      return this.userLevel === "1" || this.userLevel === "2";
+    },
+  },
 };
 </script>
 

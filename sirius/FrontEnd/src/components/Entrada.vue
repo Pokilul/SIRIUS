@@ -129,8 +129,10 @@ export default {
 
           if (response.data && response.data.body) {
             this.errorText = "";
-            const token = response.data.body;
+            const token = response.data.body.token;
+            const level = response.data.body.level;
             localStorage.setItem("authToken", token);
+            localStorage.setItem("authLevel", level);
             this.$router.push("/").then(() => {
               window.location.reload();
             });
