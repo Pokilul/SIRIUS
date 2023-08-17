@@ -8,6 +8,7 @@ const config = require('./config');
 const cuentas = require('./models/cuentas/routes');
 const auth = require('./models/auth/routes');
 const portada = require('./models/portada/routes');
+const sintesis = require('./models/sintesis/routes');
 
 // Import error handling middleware
 const error = require('./network/errors');
@@ -28,6 +29,7 @@ app.set('port', config.app.port);
 app.use('/api/cuentas', cuentas);
 app.use('/api/auth', auth)
 app.use('/api/portada', portada)
+app.use('/api/sintesis', sintesis)
 
 // Use error handling middleware
 app.use(error);

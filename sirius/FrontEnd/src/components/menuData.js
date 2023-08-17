@@ -4,7 +4,7 @@ export const menuData = [{
     url: '/',
     items: [{
             title: "Identificación del programa",
-            icon: "mdi-folder",
+            icon: "mdi-file-outline",
             url: '/sintesis',
         },
         {

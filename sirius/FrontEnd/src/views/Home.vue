@@ -213,32 +213,23 @@ export default {
   mounted() {
     this.getPortadaData();
   },
-
   methods: {
     async getPortadaData() {
       try {
-        const response = await axios.get("api/portada/1");
-        this.portada = response.data.body;
+        const { data } = await axios.get("api/portada/1");
+        this.portada = data.body;
       } catch (error) {
         console.error("Error fetching data", error);
       }
     },
     async updatePortada() {
       try {
-        let dataToSend = {
+        const response = await axios.post("api/portada/", {
           ID_Portada: 1,
-          Rector: this.portada.Rector,
-          SecAcadC: this.portada.SecAcadC,
-          Director: this.portada.Director,
-          Correo_D: this.portada.Correo_D,
-          Coordinador: this.portada.Coordinador,
-          Correo_C: this.portada.Correo_C,
-          Fecha_Elaboracion: this.portada.Fecha_Elaboracion,
-          Fecha_Corte: this.portada.Fecha_Corte,
-        };
-        console.log(dataToSend);
-        const response = await axios.post("api/portada/", dataToSend);
-        if (response.status === 200 || response.status === 201) {
+          ...this.portada,
+        });
+
+        if ([200, 201].includes(response.status)) {
           this.dialog = false;
           this.getPortadaData();
         }
@@ -247,13 +238,12 @@ export default {
       }
     },
   },
-
   computed: {
     ...mapState({
       userLevel: (state) => state.auth.level,
     }),
     canEdit() {
-      return this.userLevel === "1" || this.userLevel === "2";
+      return ["1", "2", "3"].includes(this.userLevel);
     },
   },
 };
