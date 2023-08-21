@@ -2,15 +2,12 @@
   <div>
     <v-list nav density="compact">
       <template v-for="(item, index) in menuItems" :key="index">
-        <!-- Representa un ítem sin hijos -->
         <v-list-item
           v-if="!item.items"
           :to="item.url"
           :title="item.title"
           :prepend-icon="item.icon"
         ></v-list-item>
-
-        <!-- Representa un ítem con hijos -->
         <v-list-group v-else fluid @click.prevent>
           <template v-slot:activator="{ props }">
             <v-list-item
@@ -33,7 +30,6 @@
             >
             </v-list-item>
           </template>
-          <!-- Representa la lista de hijos (recursividad) -->
           <Menu :menuItems="item.items" />
         </v-list-group>
 
@@ -58,6 +54,9 @@ export default {
 <style scoped>
 .menu-link {
   color: black;
-  font-weight: regular;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 1rem;
 }
 </style>

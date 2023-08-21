@@ -36,10 +36,13 @@ module.exports = function (InjectionDatabase) {
             throw new Error('Usuario o contraseña incorrectos');
         }
         else {
+            const cuentaData = await database.query('cuentas', { ID_Usuario: authData.ID_Usuario });
             return bcrypt.compare(Password, authData.Password)
                 .then((result) => {
                     if (result === true) {
-                        return auth.assignToken({ ...authData});
+                        const token = auth.assignToken({ ...authData });
+                        const level = cuentaData.Nivel;
+                        return { token, level };
                     }else{
                         throw new Error('Usuario o contraseña incorrectos');
                     }

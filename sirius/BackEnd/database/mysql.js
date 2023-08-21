@@ -108,6 +108,45 @@ function db_add(table, data) {
     });
 }
 
+// Función para agregar un dato o actualizar el dato dependiendo de la query que se le pase
+// Ejemplo de query: {Programa: 'Sistemas'}
+
+function db_add_update(table, query, data) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const exists = await db_check(table, query);
+
+            if (exists) {
+                const updateResult = await db_update(table, query, data);
+                resolve(updateResult);
+            } else {
+                const insertResult = await db_add(table, data);
+                resolve(insertResult);
+            }
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+
+function db_check(table, query) {
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, result) => {
+            return err ? reject(err) : resolve(result.length > 0);
+        });
+    });
+}
+
+
+function db_update(table, query, data) {
+    return new Promise((resolve, reject) => {
+        connection.query(`UPDATE ${table} SET ? WHERE ?`, [data, query], (err, result) => {
+            return err ? reject(err) : resolve(result);
+        });
+    });
+}
+
 /**
  * @function query
  * @description Queries a table with a specific condition.
@@ -129,5 +168,6 @@ module.exports = {
     db_select,
     db_delete,
     db_add,
+    db_add_update,
     query
 }

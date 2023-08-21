@@ -1,555 +1,329 @@
 <template>
   <v-card class="h-auto mt-5 ml-3 mr-3" variant="tonal">
-    <v-container
-      ><font face="Trebuchet MS">
-        <p class="text-right pr-3 pt-3">
-          <v-btn
-            v-if="editing"
-            class="text-right"
-            prepend-icon="mdi-pencil"
-            variant="outlined"
-            size="small"
-            @click="editing = !editing"
-          >
-            Editar
-          </v-btn>
-        </p>
-
-        <p class="text-h3 text-center pt-3">Síntesis<br /></p>
-        <v-container>
-          <form action="">
-            <v-table theme="light">
-              <tbody class="text-justify">
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Nombre del programa educativo vigente (sin abreviaturas)
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Programa }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.Programa"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    En su caso, nombre(s) anterior(es) del programa educativo
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Anterior }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.Anterior"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Nivel académico</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Nivel }}
-                    </div>
-                    <div v-else>
-                      <v-radio-group
-                        class="text-field"
-                        inline
-                        v-model="data.Nivel"
-                      >
-                        <v-radio label="T.S.U" value="T.S.U"></v-radio>
-                        <v-radio label="P.A" value="PA"></v-radio>
-                        <v-radio
-                          label="Licenciatura"
-                          value="Licenciatura"
-                        ></v-radio>
-                        <v-radio
-                          label="Especialidad"
-                          value="Especialidad"
-                        ></v-radio>
-                        <v-radio label="Maestría" value="Maestría"></v-radio>
-                        <v-radio label="Doctorado" value="Doctorado"></v-radio>
-                      </v-radio-group>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Modalidad</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Modalidad }}
-                    </div>
-                    <div v-else>
-                      <v-radio-group
-                        class="text-field"
-                        inline
-                        v-model="data.Modalidad"
-                      >
-                        <v-radio
-                          label="Escolarizada"
-                          value="Escolarizada"
-                        ></v-radio>
-                        <v-radio label="Mixta" value="Mixta"></v-radio>
-                        <v-radio
-                          label="No escolarizada"
-                          value="No escolarizada"
-                        ></v-radio>
-                      </v-radio-group>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Tipo de evaluación</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.TipoEva }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.TipoEva"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Campus/Sede a evaluar</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.CampusSede }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.CampusSede"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Dependencia</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Dependencia }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.Dependencia"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Institución (sin abreviaturas)</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Institucion }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.Institucion"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Régimen</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Regimen }}
-                    </div>
-                    <div v-else>
-                      <v-radio-group
-                        class="text-field"
-                        inline
-                        v-model="data.Regimen"
-                      >
-                        <v-radio label="Público" value="Público"></v-radio>
-                        <v-radio label="Privado" value="Privado"></v-radio>
-                      </v-radio-group>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Dirección postal (calle, colonia, código postal, municipio o
-                    delegación, ciudad y estado)
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Direccion }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.Direccion"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Nombre del Rector</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Rector }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.Rector"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Nombre y cargo del responsable del programa educativo
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.ResponsableProg }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.ResponsableProg"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Nombre del responsable de la autoevaluación
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.ResponsableEva }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.ResponsableEva"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Fecha de aprobación del programa educativo (1)
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.FechaAprobacion }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.FechaAprobacion"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Número de registro ante la dirección general de profesiones
-                    (1)
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.NoRegistroDGP }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.NoRegistroDGP"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    En su caso, número de reconocimiento de validez oficial de
-                    estudios
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.NoREVOE }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.NoREVOE"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Mátricula actual de la institución</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.MatriculaInst }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.MatriculaInst"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Mátricula actual del programa educativo en la sede a evaluar
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.MatriculaSede }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.MatriculaSede"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Periodicidad para nuevo ingreso (anual, semestral,
-                    trimestral, etc)
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.Periodicidad }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.Periodicidad"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Tipo de ciclo (trimestral, semestral, anual, etc)
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.TipoCiclo }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.TipoCiclo"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Número total de ciclos del plan de estudios
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.NoCiclos }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.NoCiclos"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Número de créditos obligatorios</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.CreditosOb }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.CreditosOb"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Número de créditos optativas</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.CreditosOpt }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.CreditosOpt"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Número de créditos totales</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.CreditosTotal }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.CreditosTotal"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Denominación del plan de estudios que cursan los alumnos de
-                    primer ciclo
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.DenominacionPlan }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.DenominacionPlan"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">Otros planes de estudios en operación</td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.OtrosPlanes }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="text-field"
-                        v-model="data.OtrosPlanes"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td class="w-50">
-                    Mes y año de egreso de la última generación
-                  </td>
-                  <td class="w-50">
-                    <div v-if="editing">
-                      {{ data.UltimaGeneracion }}
-                    </div>
-                    <div v-else>
-                      <v-text-field
-                        class="mt-2"
-                        v-model="data.UltimaGeneracion"
-                      ></v-text-field>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </v-table>
-            <v-row v-if="!editing" flex class="mt-3 pt-3 pb-3">
-              <v-col class="text-right"
-                ><v-btn size="x-large" color="success">Guardar</v-btn></v-col
+    <v-container style="font-family: Trebuchet MS">
+      <p class="text-right pr-3 pt-3">
+        <v-btn
+          v-if="canEdit"
+          class="text-right"
+          prepend-icon="mdi-pencil"
+          variant="outlined"
+          size="small"
+          @click="editing = !editing"
+        >
+          Editar
+        </v-btn>
+      </p>
+      <p class="text-h3 text-center pt-3">Síntesis<br /></p>
+      <v-container>
+        <form @submit.prevent="updateSintesis">
+          <v-table theme="light">
+            <tbody class="text-justify">
+              <tr
+                class="font-weight-bold"
+                v-for="item in items"
+                :key="item.label"
               >
-              <v-col class="text-left"
-                ><v-btn
-                  size="x-large"
-                  color="red-lighten-1"
-                  @click="editing = !editing"
-                  >Cancelar</v-btn
-                ></v-col
-              >
-            </v-row>
-          </form>
-        </v-container>
-      </font>
+                <td class="w-50">{{ item.label }}</td>
+                <td class="w-50">
+                  <div v-if="!editing">{{ item.model }}</div>
+                  <div v-else>
+                    <v-text-field
+                      v-if="item.componentType === 'v-text-field'"
+                      class="text-field"
+                      v-model="item.model"
+                    ></v-text-field>
+                    <v-radio-group
+                      v-if="item.componentType === 'v-radio-group'"
+                      inline
+                      v-model="item.model"
+                    >
+                      <v-radio
+                        v-for="option in item.options"
+                        :key="option.value"
+                        :label="option.label"
+                        :value="option.value"
+                      ></v-radio>
+                    </v-radio-group>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </v-table>
+          <v-row v-if="editing" flex class="mt-3 pt-3 pb-3">
+            <v-col class="text-right">
+              <v-btn
+                fluid
+                prepend-icon="mdi-check-circle"
+                rounded="lg"
+                type="submit"
+                variant="tonal"
+                size="x-large"
+                color="info"
+                >Actualizar</v-btn
+              ></v-col
+            >
+            <v-col class="text-left"
+              ><v-btn
+                fluid
+                prepend-icon="mdi-close"
+                rounded="lg"
+                variant="tonal"
+                size="x-large"
+                color="red-darken-4"
+                @click="editing = false"
+                >Cancelar</v-btn
+              ></v-col
+            >
+          </v-row>
+        </form>
+      </v-container>
     </v-container>
   </v-card>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import axios from "axios";
+
 export default {
   data: () => ({
-    editing: true,
-
-    data: {
-      Programa: "Licenciatura en Ingeniería en Sistemas Computacionales",
-
-      Anterior: "",
-
-      Nivel: "Licenciatura",
-
-      Modalidad: "Escolarizada",
-
-      TipoEva: "Evaluación diagnóstica (pendiente)",
-
-      CampusSede: "Campus Irapuato-Salamanca",
-
-      Dependencia: "División de Ingenierías",
-
-      Institucion: "Universidad de Guanajuato",
-
-      Regimen: "Público",
-
-      Direccion:
-        "Carretera Salamanca - Valle de Santiago Km. 3.5 + 1.8; Comunidad de Palo Blanco; Salamanca, Gto.",
-
-      Rector: "Dr Armando Gallegos Muñoz",
-
-      ResponsableProg: "Dr. Daniel Alberto Razo Medina",
-
-      ResponsableEva: "Mtro. Juan Ledezma",
-
-      FechaAprobacion: "0",
-
-      NoRegistroDGP: "0",
-
-      NoREVOE: "0",
-
-      MatriculaInst: "0",
-
-      MatriculaSede: "0",
-
-      Periodicidad: "0",
-
-      TipoCiclo: "0",
-
-      NoCiclos: "0",
-
-      CreditosOb: "0",
-
-      CreditosOpt: "0",
-
-      CreditosTotal: "0",
-
-      DenominacionPlan: "0",
-
-      OtrosPlanes: "0",
-
-      UltimaGeneracion: "0",
+    editing: false,
+    sintesisData: {
+      Programa: "",
+      anterior: "",
+      Nivel: "",
+      Modalidad: "",
+      TipoEva: "",
+      CampusSede: "",
+      Dependencia: "",
+      Institucion: "",
+      Regimen: "",
+      Direccion: "",
+      Rector: "",
+      ResponsableProg: "",
+      ResponsableEva: "",
+      FechaAprobacion: "",
+      NoRegistroDGP: "",
+      NoREVOE: "",
+      MatriculaInst: "",
+      MatriculaSede: "",
+      Periodicidad: "",
+      TipoCiclo: "",
+      NoCiclos: "",
+      CreditosOb: "",
+      CreditosOpt: "",
+      CreditosTotal: "",
+      DenominacionPlan: "",
+      OtrosPlanes: "",
+      UltimaGeneracion: "",
     },
+    items: [
+      {
+        label: "Nombre del programa educativo vigente (sin abreviaturas)",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Nombre del programa educativo anterior (sin abreviaturas)",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Nivel académico",
+        model: "",
+        componentType: "v-radio-group",
+        options: [
+          { label: "T.S.U", value: "T.S.U" },
+          { label: "P.A", value: "PA" },
+          { label: "Licenciatura", value: "Licenciatura" },
+          { label: "Especialidad", value: "Especialidad" },
+          { label: "Maestría", value: "Maestría" },
+          { label: "Doctorado", value: "Doctorado" },
+        ],
+      },
+      {
+        label: "Modalidad",
+        model: "",
+        componentType: "v-radio-group",
+        options: [
+          { label: "Escolarizada", value: "Escolarizada" },
+          { label: "Mixta", value: "Mixta" },
+          { label: "No escolarizada", value: "No escolarizada" },
+        ],
+      },
+      {
+        label: "Tipo de evaluación",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Campus/Sede a evaluar",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Dependencia",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Institución (sin abreviaturas)",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Régimen",
+        model: "",
+        componentType: "v-radio-group",
+        options: [
+          { label: "Público", value: "Público" },
+          { label: "Privado", value: "Privado" },
+        ],
+      },
+      {
+        label:
+          "Dirección postal (calle, colonia, código postal, municipio o delegación, ciudad y estado)",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Nombre del Rector",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Nombre y cargo del responsable del programa educativo",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Nombre del responsable de la autoevaluación",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Fecha de aprobación del programa educativo (1)",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label:
+          "Número de registro ante la dirección general de profesiones (1)",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label:
+          "En su caso, número de reconocimiento de validez oficial de estudios",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Mátricula actual de la institución",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Mátricula actual del programa educativo en la sede a evaluar",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label:
+          "Periodicidad para nuevo ingreso (anual, semestral, trimestral, etc)",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Tipo de ciclo (trimestral, semestral, anual, etc)",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Número total de ciclos del plan de estudios",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Número de créditos obligatorios",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Número de créditos optativas",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Número de créditos totales",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label:
+          "Denominación del plan de estudios que cursan los alumnos de primer ciclo",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Otros planes de estudios en operación",
+        model: "",
+        componentType: "v-text-field",
+      },
+      {
+        label: "Mes y año de egreso de la última generación",
+        model: "",
+        componentType: "v-text-field",
+      },
+    ],
   }),
+
+  mounted() {
+    this.getSintesisData();
+  },
+  methods: {
+    mapDataToItems() {
+      Object.keys(this.sintesisData).forEach((key, index) => {
+        this.items[index].model = this.sintesisData[key];
+      });
+    },
+    mapItemsToData() {
+      this.items.forEach((item, index) => {
+        this.sintesisData[Object.keys(this.sintesisData)[index]] = item.model;
+      });
+    },
+    async getSintesisData() {
+      try {
+        const { data } = await axios.get("api/sintesis/Licenciatura en Ingeniería en Sistemas Computacionales");
+        this.sintesisData = data.body;
+        this.mapDataToItems();
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    },
+    async updateSintesis() {
+      this.mapItemsToData();
+      try {
+        const { status } = await axios.post("api/sintesis/", this.sintesisData);
+        [200, 201].includes(status) && this.getSintesisData() && (this.editing = false);
+      } catch (error) {
+        console.error("Error updating data", error);
+      }
+    },
+  },
+  computed: {
+    ...mapState({
+      userLevel: state => state.auth.level,
+    }),
+    canEdit() {
+      return ["1", "2", "3"].includes(this.userLevel);
+    },
+  },
 };
 </script>
 
 <style>
 .text-field {
-  margin-top: 8px;
-  margin-bottom: -16px;
+  margin: 8px 0 -16px;
 }
 </style>
